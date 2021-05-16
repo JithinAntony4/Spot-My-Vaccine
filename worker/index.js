@@ -16,6 +16,7 @@ let localforage = require('localforage');
 
 async function sendNotification({title, body}) {
     try {
+        console.log('navigator', navigator);
         if (Notification.permission === 'granted')
             if (navigator.serviceWorker)
                 navigator.serviceWorker.getRegistration().then(async function (reg) {
