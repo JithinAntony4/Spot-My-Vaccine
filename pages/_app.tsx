@@ -1,12 +1,31 @@
 import type {AppProps} from 'next/app'
 import '../styles/globals.css'
-import React from "react";
-import {useUser} from "../lib/hooks";
+import React, {useEffect} from "react";
 import Head from "next/head";
+import {initFCM} from '../lib/fcmUtils'
 
 function MyApp({Component, pageProps}: AppProps) {
-    let user = useUser();
+    async function saveFCMToken(token) {
+        try {
+            await fetch(`/api/fcm/update`, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    fcmToken: token,
+                })
+            })
+        } catch (e) {
+            //console.log(e.message)
+        }
+    }
 
+    useEffect(() => {
+        initFCM(saveFCMToken, () => {
+        })
+    }, [])
     return (
         <>
             <Head>
