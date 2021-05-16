@@ -63,7 +63,7 @@ async function checkSlots() {
     }
 }
 
-setInterval(checkSlots, 60000 * 5);
+setInterval(checkSlots, 60000 * 1);
 
 
 self.addEventListener('message', event => {
