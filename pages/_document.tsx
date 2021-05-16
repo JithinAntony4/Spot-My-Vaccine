@@ -22,8 +22,8 @@ export default class MyDocument extends Document {
                     <link rel='apple-touch-icon' href='/images/apple-touch-icon.png'/>
                     <link rel="manifest" href="/manifest.json"/>
                     <link rel="icon" href="/images/icon-192x192.png"/>
-                    <link rel="stylesheet"
-                          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+                    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+                    <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap" rel="stylesheet"/>
 
                     <meta name='twitter:card'
                           content='summary'/>

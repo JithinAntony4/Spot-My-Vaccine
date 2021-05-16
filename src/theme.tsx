@@ -4,7 +4,7 @@ import indigo from "@material-ui/core/colors/indigo";
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: 'Arial'
+        fontFamily: 'Nova Flat'
     },
     palette: {
         primary: {500: '#F2AA4CFF'},
