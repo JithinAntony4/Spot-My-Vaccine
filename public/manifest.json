@@ -5,9 +5,9 @@
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
-  "name": "NextJs-PWA-Boilerplate",
-  "short_name": "NextJs-PWA-Boilerplate",
-  "description": "NextJs-PWA-Boilerplate",
+  "name": "SpotMyVaccine",
+  "short_name": "SpotMyVaccine",
+  "description": "SpotMyVaccine is platform for getting real-time updates about vaccines in India.",
   "icons": [
     {
       "src": "/images/icon-192x192.png",

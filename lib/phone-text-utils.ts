@@ -7,7 +7,7 @@ export async function sendSMS(phone: string, otp: string): Promise<String | Erro
     return new Promise((resolve, reject) => {
         client.messages
             .create({
-                body: `Welcome to NextJs-PWA-Boilerplate`,
+                body: `Welcome to SpotMyVaccine`,
                 from: process.env.TWILIO_FROM,
                 to: phone
             })

@@ -7,8 +7,8 @@ const theme = createMuiTheme({
         fontFamily: 'Arial'
     },
     palette: {
-        primary: {500: '#ffd600'},
-        secondary: {500: '#1a1a1a', A400: '#1a1a1a'},
+        primary: {500: '#F2AA4CFF'},
+        secondary: {500: '#101820FF', A400: '#101820FF'},
     },
     overrides: {
         // Style sheet name ⚛️
@@ -34,7 +34,7 @@ const theme = createMuiTheme({
         },
         MuiChip: {
             labelSmall: {
-                fontSize: '10px',
+                fontSize: '12px',
             }
         },
         MuiTypography: {
@@ -57,7 +57,7 @@ const theme = createMuiTheme({
         },
         MuiInputLabel: {
             root: {
-                fontSize: '9px',
+                fontSize: '12px',
             },
         },
         MuiFilledInput: {

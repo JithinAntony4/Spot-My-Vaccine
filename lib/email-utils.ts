@@ -9,7 +9,7 @@ let mailer = node_mailer.createTransport({
 
 export async function sendEmail(email: string, subject: string, otp: string): Promise<String | Error> {
     return new Promise((resolve, reject) => {
-        let content_data = `Welcome to NextJs-PWA-Boilerplate`;
+        let content_data = `Welcome to SpotMyVaccine`;
         const data = {
             to: email,
             from: process.env.FROM_MAIL,

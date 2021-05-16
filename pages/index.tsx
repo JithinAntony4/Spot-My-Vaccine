@@ -1,82 +1,55 @@
 import React, {useState} from "react";
-import {
-    AppBar,
-    Container,
-    createStyles,
-    IconButton,
-    makeStyles,
-    MenuItem,
-    Snackbar,
-    Theme,
-    Toolbar,
-    Typography
-} from "@material-ui/core";
-import {useRouter} from "next/router";
-import {useUser} from "../lib/hooks";
+import {Button, Container, Grid, IconButton, Snackbar, Typography} from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import theme from "../src/theme";
-import GoogleLoginForm from "../components/auth/GoogleLoginForm";
-import GoogleLogoutForm from "../components/auth/GoogleLogoutForm";
 import CloseIcon from '@material-ui/icons/Close';
-import {GetServerSideProps} from "next";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import DistrictWiseForm from "../components/DistrictWiseForm";
+import PincodeWiseForm from "../components/PincodeWiseForm";
+import SlotsList from "../components/SlotsList";
+import FilterForm from "../components/FilterForm";
+import {Alert} from "@material-ui/lab";
+import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
+import {useRouter} from "next/router";
 
-export default function Home({googleauthclientid}) {
+export default function Home() {
+
     let router = useRouter();
-    let user = useUser();
 
     const [errorMsg, setErrorMsg] = useState("");
     const [message, setMessage] = useState("");
+    const [sortBy, setSortBy] = useState("district");
 
-    function logout() {
-        router.push(`/api/logout`);
-    }
+    const [pincode, setPincode] = useState("");
+    const [selectedStateId, setSelectedStateId] = useState("");
+    const [selectedDistrictId, setSelectedDistrictId] = useState("");
+    const [selectedDistrictName, setSelectedDistrictName] = useState("");
 
-    async function onGoogleLoginSuccess(response) {
-        try {
-            const res = await fetch('/api/google/login', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    username: response.tokenId
-                }),
-            })
-            if (res.status === 200) return setMessage("Welcome back user");
-            setErrorMsg("Something went wrong!")
-        } catch (error) {
-            setErrorMsg(error)
-        }
-    }
+    //filters
+    const [underFortyFive, setUnderFortyFive] = useState(false);
+    const [aboveFortyFive, setAboveFortyFive] = useState(false);
+    const [isCovisheild, setCovishield] = useState(false);
+    const [isCovaxin, setCovaxin] = useState(false);
+    const [isFree, setFree] = useState(false);
+    const [isPaid, setPaid] = useState(false);
 
-    function onGoogleLoginFailure(response) {
-        setErrorMsg(response.error)
-    }
-
-    let classes = useStyles();
 
     function handleClose() {
         if (errorMsg) setErrorMsg("")
         else setMessage("");
     }
 
+    function handleBtn(value) {
+        setSortBy(value);
+        setPincode("")
+        setSelectedDistrictId("")
+        setSelectedStateId("")
+        setSelectedDistrictName("")
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <AppBar elevation={7} position="static">
-                <Toolbar>
-                    <Typography color={"secondary"} variant="h6" className={classes.title}>
-                        NextJS-PWA-Boilerplate
-                    </Typography>
-                    {!user ?
-                        <GoogleLoginForm googleauthclientid={googleauthclientid} buttonLabel={"Sign In"}
-                                         onFailure={onGoogleLoginFailure}
-                                         onSuccess={onGoogleLoginSuccess}/>
-                        :
-                        <MenuItem>
-                            <GoogleLogoutForm googleauthclientid={googleauthclientid} onSuccess={logout}/>
-                        </MenuItem>
-                    }
-                </Toolbar>
-            </AppBar>
-            <Container>
+            <Container style={{marginTop: theme.spacing(5)}}>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -95,47 +68,54 @@ export default function Home({googleauthclientid}) {
                         </React.Fragment>
                     }
                 />
+                <Grid container spacing={4} direction={"column"}
+                      justify={"center"} alignItems={"center"}>
+                    <Grid item xs={12}>
+                        <img src="/images/banner-logo.png" alt="SpotMyVaccine Logo"/>
+                    </Grid>
+                    <IconButton disableRipple onClick={event => router.push(`/notify`)}>
+                        <Alert elevation={2} icon={<NotificationsRoundedIcon/>} severity={"info"} square={false}
+                               color={"info"} variant={"standard"}>
+                            Notify me when a slots opens up
+                        </Alert>
+                    </IconButton>
+                    <Typography variant={"caption"} align={"center"}>
+                        Search for vaccination slots, Get notified when available on your device
+                    </Typography>
+                    <Grid item xs={12}>
+                        <ButtonGroup color="secondary" aria-label="outlined primary button group">
+                            <Button onClick={event => handleBtn("district")}
+                                    variant={sortBy === "district" ? "contained" : "outlined"}>District</Button>
+                            <Button onClick={event => handleBtn("pincode")}
+                                    variant={sortBy === "pincode" ? "contained" : "outlined"}>Pincode</Button>
+                        </ButtonGroup>
+                    </Grid>
+                    {sortBy === "district"
+                        ? <DistrictWiseForm setSelectedDistrictName={setSelectedDistrictName}
+                                            setSelectedDistrictId={setSelectedDistrictId}
+                                            selectedStateId={selectedStateId} setSelectedStateId={setSelectedStateId}/>
+                        :
+                        <PincodeWiseForm selectedPincode={pincode} setSelectedPincode={setPincode}/>
+                    }
+                    {selectedDistrictId &&
+                    <FilterForm
+                        underFortyFive={underFortyFive} setUnderFortyFive={setUnderFortyFive}
+                        aboveFortyFive={aboveFortyFive} setAboveFortyFive={setAboveFortyFive}
+                        isCovisheild={isCovisheild} setCovishield={setCovishield}
+                        isCovaxin={isCovaxin} setCovaxin={setCovaxin}
+                        isFree={isFree} setFree={setFree}
+                        isPaid={isPaid} setPaid={setPaid}
+                    />
+                    }
+                    <SlotsList underFortyFive={underFortyFive}
+                               aboveFortyFive={aboveFortyFive}
+                               isCovisheild={isCovisheild}
+                               isCovaxin={isCovaxin}
+                               isFree={isFree}
+                               isPaid={isPaid} pincode={pincode} selectedDistrictName={selectedDistrictName}
+                               selectedDistrictId={selectedDistrictId}/>
+                </Grid>
             </Container>
         </ThemeProvider>
     )
-}
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        list: {
-            width: 250
-        },
-        root: {
-            flexGrow: 1,
-        },
-        drawer: {
-            paddingTop: theme.spacing(5),
-            marginBottom: theme.spacing(3)
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        title: {
-            flexGrow: 1,
-            [theme.breakpoints.up('sm')]: {
-                fontSize: '18px',
-            },
-        },
-        large: {
-            width: theme.spacing(15),
-            height: theme.spacing(15),
-        },
-        heading: {
-            fontSize: theme.typography.pxToRem(15),
-            fontWeight: theme.typography.fontWeightRegular,
-        },
-    }),
-);
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    let googleauthclientid = process.env.GOOGLE_AUTH_CLIENT_ID;
-    return {
-        props: {
-            googleauthclientid: googleauthclientid
-        }, // will be passed to the page component as props
-    }
 }

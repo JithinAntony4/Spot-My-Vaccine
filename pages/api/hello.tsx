@@ -5,7 +5,7 @@ type Data = {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-    res.status(200).json({name: 'NextJS-PWA-Boilerplate'})
+    res.status(200).json({name: 'SpotMyVaccine'})
 };
 
 export default handler;
