@@ -17,7 +17,7 @@ if (!firebase.apps.length) {
     });
 }
 firebase.messaging();
-console.log('navigator1', navigator);
+console.log('_navigator1', navigator);
 
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
