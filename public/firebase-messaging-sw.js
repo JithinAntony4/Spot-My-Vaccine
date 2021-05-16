@@ -21,7 +21,7 @@ console.log('_navigator1', navigator);
 
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
-    console.log('navigator2', navigator);
+    console.log('navigator2', navigator.serviceWorker);
     if (Notification.permission === 'granted') {
         if (navigator.serviceWorker)
             navigator.serviceWorker.getRegistration().then(async function (reg) {
