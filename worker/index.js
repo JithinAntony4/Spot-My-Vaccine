@@ -17,17 +17,7 @@ let localforage = require('localforage');
 async function sendNotification({title, body}) {
     try {
         if (Notification.permission === 'granted')
-            if (navigator.serviceWorker)
-                navigator.serviceWorker.getRegistration().then(async function (reg) {
-                    if (reg)
-                        await reg.showNotification(title, {
-                            body: body,
-                        });
-                });
-            else
-                console.log('navigator.serviceWorker', navigator.serviceWorker)
-        else
-            console.log('Notification.permission', Notification.permission)
+            await self.registration.showNotification(title, {body: body});
     } catch (e) {
         console.log(e.message)
     }
@@ -43,27 +33,23 @@ async function checkSlots() {
         let response = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${district.id}&date=${date}`);
         if (response.status !== 200) return;
         let body = await response.json();
-        console.log(body);
         body.centers.forEach(center => {
             center.sessions.forEach(session => {
                 let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
-                console.log('availableCapacity', availableCapacity)
                 if (availableCapacity > 0) {
                     sendNotification({
                         body: `New ${availableCapacity} sessions is available at ${center.name} (${session.date}).Age: ${session.min_age_limit}`,
                         title: `New Slots at ${district.name} (${session.date})`
                     })
-                    console.log(`New ${availableCapacity} sessions is available at ${center.name} (${session.date}).Age: ${session.min_age_limit}`)
                 }
             })
         })
-        console.log('Completed')
     } catch (e) {
         console.log(e.message)
     }
 }
 
-setInterval(checkSlots, 60000 * 1);
+setInterval(checkSlots, 60000 * 5);
 
 
 self.addEventListener('message', event => {

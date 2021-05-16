@@ -17,8 +17,10 @@ if (!firebase.apps.length) {
     });
 }
 firebase.messaging();
+
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
+    //TODO Remove all logs
     if (Notification.permission === 'granted') {
         if (navigator.serviceWorker)
             navigator.serviceWorker.getRegistration().then(async function (reg) {
