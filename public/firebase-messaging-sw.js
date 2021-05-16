@@ -21,6 +21,7 @@ console.log('_navigator1', navigator);
 
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
+    //TODO Remove all logs
     console.log('navigator2', navigator.serviceWorker);
     if (Notification.permission === 'granted') {
         if (navigator.serviceWorker)
@@ -30,5 +31,6 @@ firebase.messaging().onBackgroundMessage(async message => {
                         body: message.notification.body,
                     });
             });
+        else console.log('navigator.serviceWorker(bg)', navigator.serviceWorker)
     }
 })
