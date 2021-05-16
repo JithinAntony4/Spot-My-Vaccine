@@ -46,7 +46,7 @@ async function checkSlots() {
         console.log(body);
         body.centers.forEach(center => {
             center.sessions.forEach(session => {
-                let availableCapacity = isNaN(session.available_capacity) ? session.available_capacity : 0;
+                let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                 console.log('availableCapacity', availableCapacity)
                 if (availableCapacity > 0) {
                     sendNotification({
