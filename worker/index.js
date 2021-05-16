@@ -24,7 +24,10 @@ async function sendNotification({title, body}) {
                             body: body,
                         });
                 });
-
+            else
+                console.log('navigator.serviceWorker', navigator.serviceWorker)
+        else
+            console.log('Notification.permission', Notification.permission)
     } catch (e) {
         console.log(e.message)
     }
@@ -44,6 +47,7 @@ async function checkSlots() {
         body.centers.forEach(center => {
             center.sessions.forEach(session => {
                 let availableCapacity = isNaN(session.available_capacity) ? session.available_capacity : 0;
+                console.log('availableCapacity', availableCapacity)
                 if (availableCapacity > 0) {
                     sendNotification({
                         body: `New ${availableCapacity} sessions is available at ${center.name} (${session.date}).Age: ${session.min_age_limit}`,
