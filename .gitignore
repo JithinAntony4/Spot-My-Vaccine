@@ -104,6 +104,6 @@ dist
 .tern-port
 /.env
 /.env.local
-/public/workbox-*.js
+/public/workbox-*
 /public/sw.js
-public/worker-*.js
+public/worker-*

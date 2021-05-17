@@ -1,0 +1,13 @@
+name: SlotCheck Cron Job
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SlotCheck Cron Job
+        run: |
+          curl --request POST \
+          --url 'https://spot-my-vaccine.vercel.app/api/cron/init' \
+          --header 'Authorization: Bearer ${{ secrets.ACTION_KEY }}'
