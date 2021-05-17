@@ -1,7 +1,7 @@
 name: SlotCheck Cron Job
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/4 * * * *'
 jobs:
   cron:
     runs-on: ubuntu-latest

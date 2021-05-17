@@ -6,6 +6,7 @@
 <br>
 <div align="center">
   <img src="https://img.shields.io/david/JithinAntony4/nextjs-pwa-boilerplate" alt="Dependency Status">  
+  <img src="https://github.com/JithinAntony4/Spot-My-Vaccine/actions/workflows/scheduled.yaml/badge.svg" alt="SlotCheck Cron Job">  
   <img src="https://img.shields.io/github/repo-size/JithinAntony4/nextjs-pwa-boilerplate" alt="Repo Size">
   <img src="https://img.shields.io/opencollective/backers/redgoral" alt="Backers on Open Collective">
   <img src="https://img.shields.io/opencollective/sponsors/redgoral" alt="Sponsors on Open Collective">
