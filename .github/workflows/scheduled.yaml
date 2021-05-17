@@ -1,7 +1,5 @@
 name: SlotCheck Cron Job
 on:
-  push:
-  pull_request:
   schedule:
     - cron: "*/5 * * * *"
 jobs:
