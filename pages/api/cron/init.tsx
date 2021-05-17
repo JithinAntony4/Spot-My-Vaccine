@@ -23,7 +23,7 @@ export default async function initCron(req: NextApiRequest, res: NextApiResponse
             return res.send("Success")
 
         } else
-            res.status(401).send("Unauthenticated access")
+            res.status(401).send(`Unauthenticated access: ${ACTION_KEY}`)
     } catch (e) {
         console.log(e.message)
         return res.status(400).json(e.message)
