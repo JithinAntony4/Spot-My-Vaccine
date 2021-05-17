@@ -3,12 +3,9 @@ import {NextApiRequest, NextApiResponse} from "next";
 const admin = require("firebase-admin");
 
 export default async function initCron(req: NextApiRequest, res: NextApiResponse) {
-    //TODO remove in prod
-    if (true) {
+    let apisecretkey = req.headers.API_SECRET_KEY;
+    if (apisecretkey === process.env.API_SECRET_KEY) {
         try {
-            //do your job
-            //send a message to every clients
-            // process check
             const topic = 'AllUser';
 
             const message = {

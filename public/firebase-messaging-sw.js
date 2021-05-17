@@ -70,9 +70,7 @@ firebase.messaging();
 
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
-    //TODO Remove all logs
     if (message.data.type === "checkSlot") {
-        console.log('goto checkslot')
         await checkSlots()
     } else {
         if (Notification.permission === 'granted') {
