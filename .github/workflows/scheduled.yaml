@@ -1,5 +1,6 @@
 name: SlotCheck Cron Job
 on:
+  push:
   schedule:
     - cron: "*/5 * * * *"
 jobs:
