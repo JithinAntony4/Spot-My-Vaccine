@@ -81,9 +81,23 @@ firebase.messaging().onBackgroundMessage(async message => {
                             body: message.notification.body,
                             icon: "/images/icon-512x512.png",
                             badge: "/images/icon-512x512.png",
+                            actions: [
+                                {
+                                    action: 'booking',
+                                    title: 'Book your slot'
+                                }
+                            ],
                             renotify: true,
                         });
                 });
         }
     }
 })
+self.addEventListener('notificationclick', function (event) {
+    event.notification.close();
+    if (event.action === 'booking') {
+        clients.openWindow('https://selfregistration.cowin.gov.in/');
+    } else {
+        // Main body of notification was clicked
+    }
+}, false);
