@@ -19,7 +19,7 @@ export default async function initCron(req: NextApiRequest, res: NextApiResponse
             // Send a message to devices subscribed to the provided topic.
             let response = await admin.messaging().send(message);
             // Response is a message ID string.
-            console.log('Successfully sent message:', response);
+            // console.log('Successfully sent message:', response);
             return res.send("Success")
 
         } else
