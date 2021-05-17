@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Container, Grid, IconButton, Snackbar, Typography} from "@material-ui/core";
+import {Button, Container, Grid, IconButton, Paper, Snackbar, Typography} from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import theme from "../src/theme";
 import CloseIcon from '@material-ui/icons/Close';
@@ -73,12 +73,13 @@ export default function Home() {
                     <Grid item xs={12}>
                         <img src="/images/banner-logo.png" alt="SpotMyVaccine Logo"/>
                     </Grid>
-                    <IconButton disableRipple onClick={event => router.push(`/notify`)}>
-                        <Alert elevation={2} icon={<NotificationsRoundedIcon/>} severity={"info"} square={false}
+                    <Paper variant={"elevation"} onClick={event => router.push(`/notify`)}>
+                        <Alert elevation={2} icon={<NotificationsRoundedIcon/>}
+                               severity={"info"} square={false}
                                color={"info"} variant={"standard"}>
                             Notify me when a slots opens up
                         </Alert>
-                    </IconButton>
+                    </Paper>
                     <Typography variant={"caption"} align={"center"}>
                         Search for vaccination slots, Get notified when available on your device
                     </Typography>
