@@ -51,10 +51,10 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
                     if (aboveFortyFive && session.min_age_limit !== 45) return;
                     if (isCovaxin && session.vaccine !== "COVAXIN") return;
                     if (isCovisheild && session.vaccine !== "COVISHIELD") return;
-                    let availableCapacity = isNaN(session.available_capacity) ? session.available_capacity : 0;
+                    let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     let slot = slots.find(value => value.date === session.date);
                     if (slot) {
-                        if (isNaN(availableCapacity))
+                        if (!isNaN(availableCapacity))
                             slot.noOfSlots += Number(availableCapacity)
                     } else {
                         slots.push({

@@ -65,20 +65,23 @@ export default function SlotsByDayWiseList({
                     price: 0
                 }
                 let vaccineFees = center.vaccine_fees ? center.vaccine_fees : [];
+                let isHaveValidSession = false;
                 center.sessions.forEach(session => {
                     if (underFortyFive && session.min_age_limit !== 18) return;
                     if (aboveFortyFive && session.min_age_limit !== 45) return;
                     if (isCovaxin && session.vaccine !== "COVAXIN") return;
                     if (isCovisheild && session.vaccine !== "COVISHIELD") return;
-                    let availableCapacity = isNaN(session.available_capacity) ? session.available_capacity : 0;
+                    let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
+                    isHaveValidSession = true;
                     slotTemp.price = find.length > 0 ? Number(find[0].fee) : 0;
                     slotTemp.age = session.min_age_limit;
                     slotTemp.vaccine = session.vaccine;
                     slotTemp.noOfSlots = availableCapacity;
                 })
-                slots.push(slotTemp);
+                if (isHaveValidSession)
+                    slots.push(slotTemp);
             })
             setSlots(slots);
         })();
