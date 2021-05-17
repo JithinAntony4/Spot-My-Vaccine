@@ -79,6 +79,9 @@ firebase.messaging().onBackgroundMessage(async message => {
                     if (reg)
                         await reg.showNotification(message.notification.title, {
                             body: message.notification.body,
+                            icon: "/images/icon-512x512.png",
+                            badge: "/images/icon-512x512.png",
+                            renotify: true,
                         });
                 });
         }
