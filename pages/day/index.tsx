@@ -22,6 +22,7 @@ import TextField from "@material-ui/core/TextField";
 import Box from "@material-ui/core/Box";
 
 import dateLib from 'date-and-time';
+import {reverseFormattedDate} from "../../lib/dateUtils";
 
 
 export default function DayWiseList() {
@@ -64,7 +65,7 @@ export default function DayWiseList() {
                         <ArrowBackRoundedIcon fontSize={"small"}/>
                     </IconButton>
                     <Typography color={"secondary"} variant="h6" className={classes.title}>
-                        {pincode ? `Pincode ${pincode}` : `${districtName}`} ({dateLib.format(new Date(), 'MMM DD, dddd')})
+                        {pincode ? `Pincode ${pincode}` : `${districtName}`} ({dateLib.format(new Date(reverseFormattedDate(date)), 'MMM DD, dddd')})
                     </Typography>
                 </Toolbar>
             </AppBar>

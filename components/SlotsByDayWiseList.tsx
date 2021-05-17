@@ -4,7 +4,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Container from "@material-ui/core/Container";
-import {getCurrentFormattedDate} from "../lib/dateUtils";
 import Typography from "@material-ui/core/Typography";
 import {green} from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
@@ -40,7 +39,6 @@ export default function SlotsByDayWiseList({
             if (!selectedDistrictId && !pincode) return;
             setLoading(true);
             let slots: SlotByDay[] = [];
-            let date = getCurrentFormattedDate();
             let response;
             if (selectedDistrictId)
                 response = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${selectedDistrictId}&date=${date}`);
@@ -156,11 +154,12 @@ export default function SlotsByDayWiseList({
                             </ListItemSecondaryAction>
                         </ListItem>
                         {!isHaveNoSlot &&
-                        <Button style={{backgroundColor: green["A400"]}} variant={"contained"} fullWidth>
-                            <a target="_blank" href="https://selfregistration.cowin.gov.in/">
+                        <a target="_blank" href="https://selfregistration.cowin.gov.in/">
+                            <Button style={{backgroundColor: green["A400"]}} variant={"contained"} fullWidth>
                                 Book on CoWin
-                            </a>
-                        </Button>}
+                            </Button>
+                        </a>
+                        }
                     </Paper>
                 })}
             </List>
