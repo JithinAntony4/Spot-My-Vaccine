@@ -28,7 +28,7 @@ export type SlotByDay = {
 
 export default function SlotsByDayWiseList({
                                                selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild,
-                                               isCovaxin, isFree, isPaid, date, hospitalName
+                                               isCovaxin, isSputnikV, isFree, isPaid, date, hospitalName
                                            }) {
     let router = useRouter();
     const [slots, setSlots] = React.useState<SlotByDay[]>([]);
@@ -71,6 +71,7 @@ export default function SlotsByDayWiseList({
                     if (aboveFortyFive && session.min_age_limit !== 45) return;
                     if (isCovaxin && session.vaccine !== "COVAXIN") return;
                     if (isCovisheild && session.vaccine !== "COVISHIELD") return;
+                    if (isSputnikV && session.vaccine !== "SPUTNIKV") return;
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
@@ -86,7 +87,7 @@ export default function SlotsByDayWiseList({
             setSlots(slots);
         })();
 
-    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, date, hospitalName])
+    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, date, hospitalName, isSputnikV])
 
     return (
         <Container>

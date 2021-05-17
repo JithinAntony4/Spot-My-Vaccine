@@ -30,6 +30,7 @@ export default function Home() {
     const [aboveFortyFive, setAboveFortyFive] = useState(false);
     const [isCovisheild, setCovishield] = useState(false);
     const [isCovaxin, setCovaxin] = useState(false);
+    const [isSputnikV, setSputnikV] = useState(false);
     const [isFree, setFree] = useState(false);
     const [isPaid, setPaid] = useState(false);
 
@@ -100,6 +101,7 @@ export default function Home() {
                     }
                     {selectedDistrictId &&
                     <FilterForm
+                        isSputnikV={isSputnikV} setSputnikV={setSputnikV}
                         underFortyFive={underFortyFive} setUnderFortyFive={setUnderFortyFive}
                         aboveFortyFive={aboveFortyFive} setAboveFortyFive={setAboveFortyFive}
                         isCovisheild={isCovisheild} setCovishield={setCovishield}
@@ -109,6 +111,7 @@ export default function Home() {
                     />
                     }
                     <SlotsList underFortyFive={underFortyFive}
+                               isSputnikV={isSputnikV}
                                aboveFortyFive={aboveFortyFive}
                                isCovisheild={isCovisheild}
                                isCovaxin={isCovaxin}

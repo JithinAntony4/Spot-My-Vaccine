@@ -15,7 +15,6 @@ import {useUser} from "../../lib/hooks";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import theme from "../../src/theme";
 import CloseIcon from '@material-ui/icons/Close';
-import {GetServerSideProps} from "next";
 import FilterForm from "../../components/FilterForm";
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import SlotsByDayWiseList from "../../components/SlotsByDayWiseList";
@@ -25,7 +24,7 @@ import Box from "@material-ui/core/Box";
 import dateLib from 'date-and-time';
 
 
-export default function DayWiseList({googleauthclientid}) {
+export default function DayWiseList() {
     let router = useRouter();
     let user = useUser();
 
@@ -39,6 +38,7 @@ export default function DayWiseList({googleauthclientid}) {
     const [aboveFortyFive, setAboveFortyFive] = useState(false);
     const [isCovisheild, setCovishield] = useState(false);
     const [isCovaxin, setCovaxin] = useState(false);
+    const [isSputnikV, setSputnikV] = useState(false);
     const [isFree, setFree] = useState(false);
     const [isPaid, setPaid] = useState(false);
     const [hospitalName, setHospitalName] = useState('');
@@ -89,6 +89,7 @@ export default function DayWiseList({googleauthclientid}) {
                 />
                 <Grid container>
                     <FilterForm
+                        isSputnikV={isSputnikV} setSputnikV={setSputnikV}
                         underFortyFive={underFortyFive} setUnderFortyFive={setUnderFortyFive}
                         aboveFortyFive={aboveFortyFive} setAboveFortyFive={setAboveFortyFive}
                         isCovisheild={isCovisheild} setCovishield={setCovishield}
@@ -109,6 +110,7 @@ export default function DayWiseList({googleauthclientid}) {
 
 
                     <SlotsByDayWiseList underFortyFive={underFortyFive}
+                                        isSputnikV={isSputnikV}
                                         aboveFortyFive={aboveFortyFive}
                                         isCovisheild={isCovisheild}
                                         isCovaxin={isCovaxin}
@@ -152,11 +154,3 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    let googleauthclientid = process.env.GOOGLE_AUTH_CLIENT_ID;
-    return {
-        props: {
-            googleauthclientid: googleauthclientid
-        }, // will be passed to the page component as props
-    }
-}

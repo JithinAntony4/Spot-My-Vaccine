@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import theme from "../src/theme";
 
-export default function FilterForm({underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, setUnderFortyFive, setAboveFortyFive, setCovishield, setCovaxin, setFree, setPaid}) {
+export default function FilterForm({underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isSputnikV, isFree, isPaid, setUnderFortyFive, setAboveFortyFive, setCovishield, setCovaxin, setSputnikV, setFree, setPaid}) {
 
     function handleFilterButtonClick(setter, value) {
         setter(!value)
@@ -40,6 +40,13 @@ export default function FilterForm({underFortyFive, aboveFortyFive, isCovisheild
                             color={isCovaxin ? "primary" : "default"}
                             variant={"outlined"}>
                         COVAXIN
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <Button onClick={event => handleFilterButtonClick(setSputnikV, isSputnikV)}
+                            color={isSputnikV ? "primary" : "default"}
+                            variant={"outlined"}>
+                        Sputnik V
                     </Button>
                 </Grid>
                 <Grid item>

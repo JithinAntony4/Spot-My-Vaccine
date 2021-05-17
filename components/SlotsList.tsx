@@ -21,7 +21,7 @@ export type Slot = {
     noOfSlots: number;
 }
 
-export default function SlotsList({selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, selectedDistrictName}) {
+export default function SlotsList({selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isSputnikV, isFree, isPaid, selectedDistrictName}) {
     let router = useRouter();
     const [slots, setSlots] = React.useState<Slot[]>([]);
     const [loading, setLoading] = useState(false);
@@ -51,6 +51,7 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
                     if (aboveFortyFive && session.min_age_limit !== 45) return;
                     if (isCovaxin && session.vaccine !== "COVAXIN") return;
                     if (isCovisheild && session.vaccine !== "COVISHIELD") return;
+                    if (isSputnikV && session.vaccine !== "SPUTNIKV") return;
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     let slot = slots.find(value => value.date === session.date);
                     if (slot) {
@@ -68,7 +69,7 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
             setSlots(slots);
         })();
 
-    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid])
+    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, isSputnikV])
 
     return (
         <Container>

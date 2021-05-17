@@ -9,5 +9,5 @@ jobs:
       - name: SlotCheck Cron Job
         run: |
           curl --request POST \
-          --url 'https://spot-my-vaccine.vercel.app/api/cron/init' \
+          --url 'https://www.spotmyvaccine.in/api/cron/init' \
           --header 'Authorization: Bearer ${{ secrets.ACTION_KEY }}'
