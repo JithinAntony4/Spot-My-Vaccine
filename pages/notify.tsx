@@ -31,10 +31,18 @@ import DialogActions from "@material-ui/core/DialogActions";
 import localforage from "localforage";
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import FilterForm from "../components/FilterForm";
 
 type DistrictItem = {
     id: string,
     name: string,
+    underFortyFive: boolean,
+    aboveFortyFive: boolean,
+    isCovisheild: boolean,
+    isCovaxin: boolean,
+    isSputnikV: boolean,
+    isFree: boolean,
+    isPaid: boolean,
 }
 
 export default function Notify() {
@@ -50,6 +58,15 @@ export default function Notify() {
 
     const [districts, setDistricts] = useState<DistrictItem[]>([]);
     const [notificationStatus, setNotificationStatus] = useState("granted");
+
+    //filters
+    const [underFortyFive, setUnderFortyFive] = useState(false);
+    const [aboveFortyFive, setAboveFortyFive] = useState(false);
+    const [isCovisheild, setCovishield] = useState(false);
+    const [isCovaxin, setCovaxin] = useState(false);
+    const [isSputnikV, setSputnikV] = useState(false);
+    const [isFree, setFree] = useState(false);
+    const [isPaid, setPaid] = useState(false);
 
     const enableNotification = async () => {
         try {
@@ -117,12 +134,23 @@ export default function Notify() {
         if (districts.filter(value => value.id === selectedDistrictId).length > 0) return setErrorMsg("Item is already added");
         setDistricts(prevState => [...prevState, {
             id: selectedDistrictId,
-            name: selectedDistrictName
+            name: selectedDistrictName,
+            underFortyFive: underFortyFive,
+            aboveFortyFive: aboveFortyFive,
+            isCovisheild: isCovisheild,
+            isCovaxin: isCovaxin,
+            isSputnikV: isSputnikV,
+            isFree: isFree,
+            isPaid: isPaid,
         }])
         setSelectedStateId("")
         setSelectedDistrictId("")
         setSelectedDistrictName("")
         handleCloseDialog();
+    }
+
+    function filterItem(value, type) {
+        return <li><small>{type}: <b>{value}</b></small></li>
     }
 
     return (
@@ -190,6 +218,21 @@ export default function Notify() {
                                                 {value.name}
                                             </Typography>
                                         </React.Fragment>
+                                    } secondary={
+                                        <React.Fragment>
+                                            <Typography variant={"caption"}>
+                                                Selected Filters
+                                            </Typography>
+                                            <ul>
+                                                {value.aboveFortyFive && filterItem('45+', 'Age')}
+                                                {value.underFortyFive && filterItem('18+', 'Age')}
+                                                {value.isCovaxin && filterItem('Covaxin', 'Vaccine')}
+                                                {value.isCovisheild && filterItem('Covisheild', 'Vaccine')}
+                                                {value.isSputnikV && filterItem('Sputnik V', 'Vaccine')}
+                                                {value.isFree && filterItem('Free', 'Price')}
+                                                {value.isPaid && filterItem('Paid', 'Price')}
+                                            </ul>
+                                        </React.Fragment>
                                     }/>
                                     <ListItemSecondaryAction>
                                         <IconButton onClick={event => removeDistrict(value.id)}>
@@ -216,12 +259,21 @@ export default function Notify() {
                                               setSelectedDistrictId={setSelectedDistrictId}
                                               selectedStateId={selectedStateId}
                                               setSelectedStateId={setSelectedStateId}/>
+                            <FilterForm
+                                isSputnikV={isSputnikV} setSputnikV={setSputnikV}
+                                underFortyFive={underFortyFive} setUnderFortyFive={setUnderFortyFive}
+                                aboveFortyFive={aboveFortyFive} setAboveFortyFive={setAboveFortyFive}
+                                isCovisheild={isCovisheild} setCovishield={setCovishield}
+                                isCovaxin={isCovaxin} setCovaxin={setCovaxin}
+                                isFree={isFree} setFree={setFree}
+                                isPaid={isPaid} setPaid={setPaid}
+                            />
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseDialog} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={addDistrict} color="primary">
+                            <Button disabled={selectedDistrictId === ""} onClick={addDistrict} color="primary">
                                 Add
                             </Button>
                         </DialogActions>
