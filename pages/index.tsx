@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Container, Grid, IconButton, Paper, Snackbar, Typography} from "@material-ui/core";
+import {Button, Container, createStyles, Grid, IconButton, Paper, Snackbar, Theme, Typography} from "@material-ui/core";
 import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import theme from "../src/theme";
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,8 +11,11 @@ import FilterForm from "../components/FilterForm";
 import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
 import {useRouter} from "next/router";
 import blue from "@material-ui/core/colors/blue";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export default function Home() {
+
+    const classes = useStyles();
 
     let router = useRouter();
 
@@ -50,7 +53,7 @@ export default function Home() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container style={{marginTop: theme.spacing(5)}}>
+            <Container className={classes.root} style={{marginTop: theme.spacing(5)}}>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -125,3 +128,12 @@ export default function Home() {
         </ThemeProvider>
     )
 }
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            [theme.breakpoints.up('sm')]: {
+                width: '50%',
+            },
+        },
+    }),
+);
