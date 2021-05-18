@@ -23,7 +23,18 @@ function getCurrentFormattedDate() {
 async function sendNotification({title, body}) {
     try {
         if (Notification.permission === 'granted')
-            await self.registration.showNotification(title, {body: body});
+            await self.registration.showNotification(title, {
+                body: body, icon: "/images/icon-512x512.png",
+                tag: 'slot',
+                badge: "/images/icon-512x512.png",
+                actions: [
+                    {
+                        action: 'booking',
+                        title: 'Book your slot'
+                    }
+                ],
+                renotify: true,
+            });
     } catch (e) {
         console.log(e.message)
     }
@@ -94,7 +105,6 @@ firebase.messaging().onBackgroundMessage(async message => {
                                     title: 'Book your slot'
                                 }
                             ],
-                            renotify: true,
                         });
                 });
         }
