@@ -19,6 +19,8 @@ export type SlotByDay = {
     name: string;
     blockName: string;
     pinCode: string;
+    dose1: string;
+    dose2: string;
     vaccine: string;
     noOfSlots: number;
     price: number;
@@ -53,17 +55,7 @@ export default function SlotsByDayWiseList({
                 if (hospitalName && !center.name.includes(hospitalName)) return;
                 if (isPaid && center.fee_type !== "Paid") return;
                 if (isFree && center.fee_type !== "Free") return;
-                let slotTemp: SlotByDay = {
-                    name: center.name,
-                    blockName: center.block_name,
-                    pinCode: center.pincode,
-                    noOfSlots: 0,
-                    vaccine: '',
-                    age: 0,
-                    price: 0
-                }
                 let vaccineFees = center.vaccine_fees ? center.vaccine_fees : [];
-                let isHaveValidSession = false;
                 center.sessions.forEach(session => {
                     if (underFortyFive && session.min_age_limit !== 18) return;
                     if (aboveFortyFive && session.min_age_limit !== 45) return;
@@ -71,17 +63,25 @@ export default function SlotsByDayWiseList({
                     if (isCovisheild && session.vaccine !== "COVISHIELD") return;
                     if (isSputnikV && session.vaccine !== "SPUTNIKV") return;
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
+                    let availableCapacityDose1 = !isNaN(session.available_capacity_dose1) ? session.available_capacity_dose1 : 0;
+                    let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
                     if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
-                    isHaveValidSession = true;
-                    slotTemp.price = find.length > 0 ? Number(find[0].fee) : 0;
-                    slotTemp.age = session.min_age_limit;
-                    slotTemp.vaccine = session.vaccine;
-                    slotTemp.noOfSlots = availableCapacity;
+                    slots.push({
+                            name: center.name,
+                            blockName: center.block_name,
+                            pinCode: center.pincode,
+                            noOfSlots: availableCapacity,
+                            vaccine: session.vaccine,
+                            dose1: availableCapacityDose1,
+                            dose2: availableCapacityDose2,
+                            age: session.min_age_limit,
+                            price: find.length > 0 ? Number(find[0].fee) : 0
+                        }
+                    );
                 })
-                if (isHaveValidSession)
-                    slots.push(slotTemp);
             })
+            slots.sort((a, b) => b.noOfSlots - a.noOfSlots);
             setSlots(slots);
         })();
 
@@ -93,7 +93,7 @@ export default function SlotsByDayWiseList({
                 {loading &&
                 <LoadingView number={3}/>
                 }
-                {slots.length <= 0 &&
+                {(slots.length <= 0 && !loading) &&
                 <EmptyListView/>
                 }
                 {slots.map((value, index) => {
@@ -139,6 +139,7 @@ export default function SlotsByDayWiseList({
                                         <Typography variant={"caption"}
                                                     style={{color: red["A400"]}}><b>(₹{value.price})</b></Typography>}
                                         </Typography>
+
                                     </Grid>
                                 </React.Fragment>
                             }/>
@@ -150,6 +151,19 @@ export default function SlotsByDayWiseList({
                                             {isHaveNoSlot ? "No Slots" : `${noOfSlots} Slots`}
                                         </b>
                                     </Typography>
+                                    {!isHaveNoSlot && <>
+                                        <br/>
+                                        <br/>
+                                        <Typography variant={"caption"}
+                                                    color={"textSecondary"}>
+                                            Dose1: <b>{value.dose1}</b>
+                                        </Typography>
+                                        <br/>
+                                        <Typography variant={"caption"}
+                                                    color={"textSecondary"}>
+                                            Dose2: <b>{value.dose2}</b>
+                                        </Typography>
+                                    </>}
                                 </React.Fragment>
                             </ListItemSecondaryAction>
                         </ListItem>
