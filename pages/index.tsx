@@ -75,7 +75,8 @@ export default function Home() {
                         <img src="/images/banner-logo.png" alt="SpotMyVaccine Logo"/>
                     </Grid>
                     <Typography variant={"caption"} align={"center"}>
-                        Search for vaccination slots, Get notified when available on your device
+                        Search for vaccination slots nearby your location, Get notified when a slot is available in your
+                        area on you Device
                     </Typography>
                     <Paper elevation={0} style={{margin: theme.spacing(2)}}
                            onClick={event => router.push(`/notify`)}>
