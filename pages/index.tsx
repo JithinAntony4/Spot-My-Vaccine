@@ -77,6 +77,14 @@ export default function Home() {
                     <Typography variant={"caption"} align={"center"}>
                         Search for vaccination slots, Get notified when available on your device
                     </Typography>
+                    <Paper elevation={0} style={{margin: theme.spacing(2)}}
+                           onClick={event => router.push(`/notify`)}>
+                        <Button variant={"contained"} style={{color: "white", backgroundColor: blue["A400"]}}
+                                size={"small"}
+                                startIcon={<NotificationsRoundedIcon/>}>
+                            Notify me when a slot opens up
+                        </Button>
+                    </Paper>
                     <Grid item xs={12}>
                         <ButtonGroup color="secondary" aria-label="outlined primary button group">
                             <Button onClick={event => handleBtn("district")}
@@ -103,14 +111,6 @@ export default function Home() {
                         isPaid={isPaid} setPaid={setPaid}
                     />
                     }
-                    <Paper elevation={0} style={{margin: theme.spacing(2)}}
-                           onClick={event => router.push(`/notify`)}>
-                        <Button variant={"contained"} style={{color: "white", backgroundColor: blue["A400"]}}
-                                size={"small"}
-                                startIcon={<NotificationsRoundedIcon/>}>
-                            Notify me when a slot opens up
-                        </Button>
-                    </Paper>
                     <SlotsList underFortyFive={underFortyFive}
                                isSputnikV={isSputnikV}
                                aboveFortyFive={aboveFortyFive}

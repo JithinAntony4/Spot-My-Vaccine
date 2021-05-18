@@ -77,7 +77,7 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
                 {loading &&
                 <LoadingView number={3}/>
                 }
-                {slots.length <= 0 &&
+                {(slots.length <= 0 && (selectedDistrictId || pincode)) &&
                 <EmptyListView/>
                 }
                 {slots.map((value, index) => {
