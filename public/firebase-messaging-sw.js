@@ -72,9 +72,11 @@ async function checkSlots() {
                     else if (district.isSputnikV && session.vaccine !== "SPUTNIKV") return;
                 }
                 let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
+                let availableCapacityDose1 = !isNaN(session.available_capacity_dose1) ? session.available_capacity_dose1 : 0;
+                let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
                 if (availableCapacity > 0) {
                     sendNotification({
-                        body: `New ${availableCapacity} sessions is available at ${center.name} (${session.date}).Age: ${session.min_age_limit}`,
+                        body: `Slots:\t${availableCapacity}\nAge:\t${session.min_age_limit}+\nDose1:\t${availableCapacityDose1}\nDose2:\t${availableCapacityDose2}`,
                         title: `New Slots at ${district.name} (${session.date})`
                     })
                 }
