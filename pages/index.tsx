@@ -8,9 +8,9 @@ import DistrictWiseForm from "../components/DistrictWiseForm";
 import PincodeWiseForm from "../components/PincodeWiseForm";
 import SlotsList from "../components/SlotsList";
 import FilterForm from "../components/FilterForm";
-import {Alert} from "@material-ui/lab";
 import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
 import {useRouter} from "next/router";
+import blue from "@material-ui/core/colors/blue";
 
 export default function Home() {
 
@@ -74,13 +74,6 @@ export default function Home() {
                     <Grid item xs={12}>
                         <img src="/images/banner-logo.png" alt="SpotMyVaccine Logo"/>
                     </Grid>
-                    <Paper variant={"elevation"} onClick={event => router.push(`/notify`)}>
-                        <Alert elevation={2} icon={<NotificationsRoundedIcon/>}
-                               severity={"info"} square={false}
-                               color={"info"} variant={"standard"}>
-                            Notify me when a slots opens up
-                        </Alert>
-                    </Paper>
                     <Typography variant={"caption"} align={"center"}>
                         Search for vaccination slots, Get notified when available on your device
                     </Typography>
@@ -110,6 +103,14 @@ export default function Home() {
                         isPaid={isPaid} setPaid={setPaid}
                     />
                     }
+                    <Paper elevation={0} style={{margin: theme.spacing(2)}}
+                           onClick={event => router.push(`/notify`)}>
+                        <Button variant={"contained"} style={{color: "white", backgroundColor: blue["A400"]}}
+                                size={"small"}
+                                startIcon={<NotificationsRoundedIcon/>}>
+                            Notify me when a slot opens up
+                        </Button>
+                    </Paper>
                     <SlotsList underFortyFive={underFortyFive}
                                isSputnikV={isSputnikV}
                                aboveFortyFive={aboveFortyFive}
