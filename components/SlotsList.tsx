@@ -14,6 +14,7 @@ import {useRouter} from "next/router";
 import EmptyListView from "./EmptyListView";
 import LoadingView from "./LoadingView";
 import dateLib from 'date-and-time';
+import {isFilteredCenter, isFilteredSession} from "../lib/utils";
 
 export type Slot = {
     id: string;
@@ -44,14 +45,16 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
             let body = await response.json();
 
             body.centers.forEach(center => {
-                if (isPaid && center.fee_type !== "Paid") return;
-                if (isFree && center.fee_type !== "Free") return;
+                if (!isFilteredCenter({isFree: isFree, isPaid: isPaid, center: center})) return;
                 center.sessions.forEach(session => {
-                    if (underFortyFive && session.min_age_limit !== 18) return;
-                    if (aboveFortyFive && session.min_age_limit !== 45) return;
-                    if (isCovaxin && session.vaccine !== "COVAXIN") return;
-                    if (isCovisheild && session.vaccine !== "COVISHIELD") return;
-                    if (isSputnikV && session.vaccine !== "SPUTNIKV") return;
+                    if (!isFilteredSession({
+                        underFortyFive,
+                        aboveFortyFive,
+                        session,
+                        isCovaxin,
+                        isCovisheild,
+                        isSputnikV
+                    })) return;
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     let slot = slots.find(value => value.date === session.date);
                     if (slot) {

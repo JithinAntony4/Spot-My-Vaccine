@@ -14,6 +14,7 @@ import red from "@material-ui/core/colors/red";
 import Button from "@material-ui/core/Button";
 import LoadingView from "./LoadingView";
 import EmptyListView from "./EmptyListView";
+import {isFilteredCenter, isFilteredSession} from "../lib/utils";
 
 export type SlotByDay = {
     name: string;
@@ -52,24 +53,27 @@ export default function SlotsByDayWiseList({
             let body = await response.json();
 
             body.centers.forEach(center => {
-                if (hospitalName && !center.name.includes(hospitalName)) return;
-                if (isPaid && center.fee_type !== "Paid") return;
-                if (isFree && center.fee_type !== "Free") return;
+                if (!isFilteredCenter({isFree: isFree, isPaid: isPaid, center: center})) return;
                 let vaccineFees = center.vaccine_fees ? center.vaccine_fees : [];
                 center.sessions.forEach(session => {
-                    if (underFortyFive && session.min_age_limit !== 18) return;
-                    if (aboveFortyFive && session.min_age_limit !== 45) return;
-                    if (isCovaxin && session.vaccine !== "COVAXIN") return;
-                    if (isCovisheild && session.vaccine !== "COVISHIELD") return;
-                    if (isSputnikV && session.vaccine !== "SPUTNIKV") return;
+                    if (!isFilteredSession({
+                        underFortyFive,
+                        aboveFortyFive,
+                        session,
+                        isCovaxin,
+                        isCovisheild,
+                        isSputnikV
+                    })) return;
+
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     let availableCapacityDose1 = !isNaN(session.available_capacity_dose1) ? session.available_capacity_dose1 : 0;
                     let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
                     if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
+                    if (hospitalName && !center.name.includes(hospitalName)) return;
                     slots.push({
-                            name: center.name,
-                            blockName: center.block_name,
+                        name: center.name,
+                        blockName: center.block_name,
                             pinCode: center.pincode,
                             noOfSlots: availableCapacity,
                             vaccine: session.vaccine,
