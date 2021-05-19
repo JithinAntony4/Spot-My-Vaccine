@@ -15,12 +15,24 @@
 </div>
 
 ## Screenshots
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/splash_screen.jpeg" alt="Splash Screen">
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-district-wise.jpeg" alt="Home District Wise">
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-pincode-wise.jpeg" alt="Home Pincode Wise">
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/day-wise-list.jpeg" alt="Day Wise List">
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard.jpeg" alt="Notification Dashboard">
-<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard-add-district.jpeg" alt="Add District">
+<table>
+<tr>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/splash_screen.jpeg" alt="Splash Screen"></td>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-district-wise.jpeg" alt="Home District Wise"></td>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-pincode-wise.jpeg" alt="Home Pincode Wise"></td>
+</tr>
+<tr>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/day-wise-list.jpeg" alt="Day Wise List"></td>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard.jpeg" alt="Notification Dashboard"></td>
+<td><img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard-add-district.jpeg" alt="Add District"></td>
+</tr>
+</table>
+
+
+
+
+
+
 
 ## Features
 * Vaccine Slot Checker
