@@ -100,15 +100,15 @@ if (!firebase.apps.length) {
 }
 
 //background notifications will be received here
-firebase.messaging().onBackgroundMessage(async message => {
+firebase.messaging().onBackgroundMessage(message => {
     if (message.data.type === "checkSlot") {
-        await checkSlots()
+        checkSlots()
     } else {
         if (Notification.permission === 'granted') {
             if (navigator.serviceWorker)
                 navigator.serviceWorker.getRegistration().then(async function (reg) {
                     if (reg)
-                        await reg.showNotification(message.notification.title, {
+                        reg.showNotification(message.notification.title, {
                             body: message.notification.body,
                             icon: "/images/icon-512x512.png",
                             badge: "/images/icon-512x512.png",
