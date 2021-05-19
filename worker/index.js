@@ -67,8 +67,7 @@ async function sendNotification({title, body}) {
                         action: 'booking',
                         title: 'Book your slot'
                     }
-                ],
-                renotify: true,
+                ]
             });
     } catch (e) {
         console.log(e.message)

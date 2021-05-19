@@ -32,8 +32,7 @@ async function sendNotification({title, body}) {
                         action: 'booking',
                         title: 'Book your slot'
                     }
-                ],
-                renotify: true,
+                ]
             });
     } catch (e) {
         console.log(e.message)
@@ -98,17 +97,17 @@ if (!firebase.apps.length) {
         measurementId: "G-WVSWNT194M"
     });
 }
-
+const messaging = firebase.messaging();
 //background notifications will be received here
-firebase.messaging().onBackgroundMessage(message => {
+messaging.onBackgroundMessage(async message => {
     if (message.data.type === "checkSlot") {
-        checkSlots()
+        await checkSlots()
     } else {
         if (Notification.permission === 'granted') {
             if (navigator.serviceWorker)
                 navigator.serviceWorker.getRegistration().then(async function (reg) {
                     if (reg)
-                        reg.showNotification(message.notification.title, {
+                        await reg.showNotification(message.notification.title, {
                             body: message.notification.body,
                             icon: "/images/icon-512x512.png",
                             badge: "/images/icon-512x512.png",
