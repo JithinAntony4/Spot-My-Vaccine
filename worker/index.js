@@ -42,8 +42,8 @@ async function checkSlots() {
                 let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
                 if (availableCapacity > 0) {
                     sendNotification({
-                        body: `Slots:\t${availableCapacity}\nAge:\t${session.min_age_limit}+\nDose1:\t${availableCapacityDose1}\nDose2:\t${availableCapacityDose2}`,
-                        title: `New Slots at ${district.name} (${session.date})`
+                        body: `Slots: \t${availableCapacity}\nAge: \t${session.min_age_limit}+\nDose1: \t${availableCapacityDose1}\nDose2: \t${availableCapacityDose2}`,
+                        title: `New Slots at ${center.name} (${session.date})`
                     })
                 }
             })
