@@ -15,12 +15,12 @@
 </div>
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/splash_screen.jpeg" alt="Splash Screen">
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-district-wise.jpeg" alt="Home District Wise">
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-pincode-wise.jpeg" alt="Home Pincode Wise">
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/day-wise-list.jpeg" alt="Day Wise List">
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard.jpeg" alt="Notification Dashboard">
-<img src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard-add-district.jpeg" alt="Add District">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/splash_screen.jpeg" alt="Splash Screen">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-district-wise.jpeg" alt="Home District Wise">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/home-pincode-wise.jpeg" alt="Home Pincode Wise">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/day-wise-list.jpeg" alt="Day Wise List">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard.jpeg" alt="Notification Dashboard">
+<img width="200" height="400" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/demo/notification-dashboard-add-district.jpeg" alt="Add District">
 
 ## Features
 * Vaccine Slot Checker
