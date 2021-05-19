@@ -1,5 +1,6 @@
-<img style="width:50%; display: block;margin-left: auto;margin-right: auto;" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/images/banner-logo.png" alt="SpotMyVaccine Banner" align="center" />
-
+<div align="center">
+    <img style="width:50%; display: block;margin-left: auto;margin-right: auto;" src="https://raw.githubusercontent.com/JithinAntony4/Spot-My-Vaccine/main/public/images/banner-logo.png" alt="SpotMyVaccine Banner" align="center" />
+</div>
 <br />
 <div align="center">
   <img src="https://img.shields.io/david/JithinAntony4/Spot-My-Vaccine" alt="Dependency Status">  
