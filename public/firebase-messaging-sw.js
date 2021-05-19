@@ -98,7 +98,6 @@ if (!firebase.apps.length) {
         measurementId: "G-WVSWNT194M"
     });
 }
-firebase.messaging();
 
 //background notifications will be received here
 firebase.messaging().onBackgroundMessage(async message => {
