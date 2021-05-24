@@ -107,3 +107,4 @@ dist
 /public/workbox-*
 /public/sw.js
 public/worker-*
+public/fallback-*.js
