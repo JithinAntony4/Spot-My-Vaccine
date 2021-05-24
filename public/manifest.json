@@ -8,6 +8,18 @@
   "name": "SpotMyVaccine",
   "short_name": "SpotMyVaccine",
   "description": "SpotMyVaccine is platform for getting real-time updates about vaccines in India.",
+  "shortcuts": [
+    {
+      "name": "My Preferred Districts",
+      "url": "/notify?utm-source=homescreen",
+      "icons": [
+        {
+          "src": "/images/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
   "icons": [
     {
       "src": "/images/icon-192x192.png",
