@@ -108,11 +108,11 @@ function NearBySlotListItem({router, index, value}) {
         }} key={index} button>
             <ListItemText primary={
                 <React.Fragment>
-                    <Typography variant={"h6"}
+                    <Typography noWrap variant={"h6"}
                                 color={"textSecondary"}>
                         <b>
                             {value.name} {(slots && slots.length > 0) &&
-                        <Typography style={{color: !isHaveNoSlot && green["A400"]}}
+                        <Typography noWrap style={{color: !isHaveNoSlot && green["A400"]}}
                                     variant={"caption"}
                                     color={isHaveNoSlot ? "textSecondary" : "initial"}>
                             (

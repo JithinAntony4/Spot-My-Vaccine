@@ -141,7 +141,7 @@ export default function NearByWiseForm({setLocation, setErrorMsg}) {
                         margin={"dense"}
                         onChange={event => setInputVal(event.target.value)}
                         size={"small"}
-                        label="Search Place"
+                        label="Search Location for vaccination"
                         variant="outlined"
                         InputProps={{
                             ...params.InputProps,

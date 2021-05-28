@@ -75,7 +75,7 @@ export default function SlotsByDayWiseList({
                     let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
                     if (!centerId) if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
-                    if (hospitalName && !center.name.includes(hospitalName)) return;
+                    if (hospitalName && !center.name.toLowerCase().includes(hospitalName.toLowerCase())) return;
                     slots.push({
                             name: center.name,
                             blockName: center.block_name,
