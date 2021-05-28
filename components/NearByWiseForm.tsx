@@ -20,28 +20,15 @@ export default function NearByWiseForm({setLocation, setErrorMsg}) {
     const statesListLoading = stateListOpen && states.length === 0;
 
     React.useEffect(() => {
-        let active = true;
-
-        if (!inputVal) {
-            return undefined;
-        }
-
-
         (async () => {
             const response = await fetch(`/api/places/get?inputType=${inputVal}`);
             if (response.status !== 200) return;
             let bodyJson = await response.json();
             let modeInputTypes: AutocompleteInputType[] = [];
             if (!bodyJson.predictions) return;
-            if (active) {
-                setStates(modeInputTypes);
-                setStates(Object.keys(bodyJson.predictions).map((key) => bodyJson.predictions[key]) as AutocompleteInputType[]);
-            }
+            setStates(modeInputTypes);
+            setStates(Object.keys(bodyJson.predictions).map((key) => bodyJson.predictions[key]) as AutocompleteInputType[]);
         })();
-
-        return () => {
-            active = false;
-        };
     }, [inputVal]);
 
 
