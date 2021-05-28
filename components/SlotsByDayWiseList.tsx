@@ -15,6 +15,8 @@ import Button from "@material-ui/core/Button";
 import LoadingView from "./LoadingView";
 import EmptyListView from "./EmptyListView";
 import {isFilteredCenter, isFilteredSession} from "../lib/utils";
+import {getCurrentFormattedDate, reverseFormattedDate} from "../lib/dateUtils";
+import dateLib from 'date-and-time';
 
 export type SlotByDay = {
     name: string;
@@ -26,11 +28,12 @@ export type SlotByDay = {
     noOfSlots: number;
     price: number;
     age: number;
+    date: string;
 }
 
 export default function SlotsByDayWiseList({
                                                selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild,
-                                               isCovaxin, isSputnikV, isFree, isPaid, date, hospitalName
+                                               isCovaxin, isSputnikV, isFree, isPaid, date, hospitalName, centerId
                                            }) {
     let router = useRouter();
     const [slots, setSlots] = React.useState<SlotByDay[]>([]);
@@ -39,7 +42,7 @@ export default function SlotsByDayWiseList({
     useEffect(() => {
         (async () => {
             setSlots([]);
-            if (!selectedDistrictId && !pincode) return;
+            if (!selectedDistrictId && !pincode && !centerId) return;
             setLoading(true);
             let slots: SlotByDay[] = [];
             let response;
@@ -47,12 +50,14 @@ export default function SlotsByDayWiseList({
                 response = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${selectedDistrictId}&date=${date}`);
             else if (pincode)
                 response = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pincode}&date=${date}`);
+            else if (centerId)
+                response = await fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByCenter?center_id=${centerId}&date=${getCurrentFormattedDate()}`)
             else return;
             setLoading(false);
             if (response.status !== 200) return;
             let body = await response.json();
-
-            body.centers.forEach(center => {
+            let centers = centerId ? [body.centers] : body.centers;
+            centers.forEach(center => {
                 if (!isFilteredCenter({isFree: isFree, isPaid: isPaid, center: center})) return;
                 let vaccineFees = center.vaccine_fees ? center.vaccine_fees : [];
                 center.sessions.forEach(session => {
@@ -68,28 +73,30 @@ export default function SlotsByDayWiseList({
                     let availableCapacity = !isNaN(session.available_capacity) ? session.available_capacity : 0;
                     let availableCapacityDose1 = !isNaN(session.available_capacity_dose1) ? session.available_capacity_dose1 : 0;
                     let availableCapacityDose2 = !isNaN(session.available_capacity_dose2) ? session.available_capacity_dose2 : 0;
-                    if (session.date !== date) return;
+                    if (!centerId) if (session.date !== date) return;
                     let find = vaccineFees.filter(value => value.vaccine === session.vaccine) || [];
                     if (hospitalName && !center.name.includes(hospitalName)) return;
                     slots.push({
-                        name: center.name,
-                        blockName: center.block_name,
+                            name: center.name,
+                            blockName: center.block_name,
                             pinCode: center.pincode,
                             noOfSlots: availableCapacity,
                             vaccine: session.vaccine,
                             dose1: availableCapacityDose1,
                             dose2: availableCapacityDose2,
                             age: session.min_age_limit,
-                            price: find.length > 0 ? Number(find[0].fee) : 0
+                            price: find.length > 0 ? Number(find[0].fee) : 0,
+                            date: session.date
                         }
                     );
                 })
             })
-            slots.sort((a, b) => b.noOfSlots - a.noOfSlots);
+            if (!centerId)
+                slots.sort((a, b) => b.noOfSlots - a.noOfSlots);
             setSlots(slots);
         })();
 
-    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, date, hospitalName, isSputnikV])
+    }, [selectedDistrictId, pincode, underFortyFive, aboveFortyFive, isCovisheild, isCovaxin, isFree, isPaid, date, hospitalName, isSputnikV, centerId])
 
     return (
         <Container>
@@ -111,6 +118,12 @@ export default function SlotsByDayWiseList({
                         }} key={index} button>
                             <ListItemText primary={
                                 <React.Fragment>
+                                    {centerId &&
+                                    <Typography paragraph variant={"caption"}
+                                                color={"textSecondary"}>
+                                        <b>{dateLib.format(new Date(reverseFormattedDate(value.date)), 'MMM DD, dddd')}</b>
+                                    </Typography>
+                                    }
                                     <Typography variant={"h6"}
                                                 color={"textSecondary"}>
                                         <b>
