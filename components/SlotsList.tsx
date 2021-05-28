@@ -239,9 +239,10 @@ export default function SlotsList({selectedDistrictId, pincode, underFortyFive, 
                     let noOfSlots = value.noOfSlots;
                     let isHaveNoSlot = noOfSlots <= 0;
                     return location ?
-                        <NearBySlotListItem router={router} index={index}
+                        <NearBySlotListItem key={index} router={router} index={index}
                                             value={value}/> :
-                        <SlotListItem router={router} index={index} isHaveNoSlot={isHaveNoSlot} noOfSlots={noOfSlots}
+                        <SlotListItem key={index} router={router} index={index} isHaveNoSlot={isHaveNoSlot}
+                                      noOfSlots={noOfSlots}
                                       pincode={pincode} value={value} selectedDistrictId={selectedDistrictId}
                                       selectedDistrictName={selectedDistrictName}/>
                 })}

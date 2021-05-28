@@ -6,7 +6,7 @@ export default function LoadingView({number}) {
     arr.fill(0);
     return (
         <>
-            {arr.map(value => <Skeleton height={40} variant="text"/>)}
+            {arr.map((value, index) => <Skeleton key={index} height={40} variant="text"/>)}
         </>
     )
 }
