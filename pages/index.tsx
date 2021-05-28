@@ -12,6 +12,7 @@ import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
 import {useRouter} from "next/router";
 import blue from "@material-ui/core/colors/blue";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import NearByWiseForm from "../components/NearByWiseForm";
 
 export default function Home() {
 
@@ -21,13 +22,14 @@ export default function Home() {
 
     const [errorMsg, setErrorMsg] = useState("");
     const [message, setMessage] = useState("");
-    const [sortBy, setSortBy] = useState("district");
+    const [sortBy, setSortBy] = useState("nearby");
 
     const [pincode, setPincode] = useState("");
     const [selectedStateId, setSelectedStateId] = useState("");
     const [selectedDistrictId, setSelectedDistrictId] = useState("");
     const [selectedDistrictName, setSelectedDistrictName] = useState("");
 
+    const [location, setLocation] = useState("");
     //filters
     const [underFortyFive, setUnderFortyFive] = useState(false);
     const [aboveFortyFive, setAboveFortyFive] = useState(false);
@@ -46,6 +48,7 @@ export default function Home() {
     function handleBtn(value) {
         setSortBy(value);
         setPincode("")
+        setLocation("")
         setSelectedDistrictId("")
         setSelectedStateId("")
         setSelectedDistrictName("")
@@ -91,6 +94,8 @@ export default function Home() {
                     </Paper>
                     <Grid item xs={12}>
                         <ButtonGroup color="secondary" aria-label="outlined primary button group">
+                            <Button onClick={event => handleBtn("nearby")}
+                                    variant={sortBy === "nearby" ? "contained" : "outlined"}>Near By</Button>
                             <Button onClick={event => handleBtn("district")}
                                     variant={sortBy === "district" ? "contained" : "outlined"}>District</Button>
                             <Button onClick={event => handleBtn("pincode")}
@@ -102,9 +107,11 @@ export default function Home() {
                                             setSelectedDistrictId={setSelectedDistrictId}
                                             selectedStateId={selectedStateId} setSelectedStateId={setSelectedStateId}/>
                         :
-                        <PincodeWiseForm selectedPincode={pincode} setSelectedPincode={setPincode}/>
+                        (sortBy === "nearby" ?
+                            <NearByWiseForm setErrorMsg={setErrorMsg} setLocation={setLocation}/>
+                            : <PincodeWiseForm selectedPincode={pincode} setSelectedPincode={setPincode}/>)
                     }
-                    {selectedDistrictId &&
+                    {(selectedDistrictId || pincode) &&
                     <FilterForm
                         isSputnikV={isSputnikV} setSputnikV={setSputnikV}
                         underFortyFive={underFortyFive} setUnderFortyFive={setUnderFortyFive}
@@ -120,7 +127,7 @@ export default function Home() {
                                aboveFortyFive={aboveFortyFive}
                                isCovisheild={isCovisheild}
                                isCovaxin={isCovaxin}
-                               isFree={isFree}
+                               isFree={isFree} location={location}
                                isPaid={isPaid} pincode={pincode} selectedDistrictName={selectedDistrictName}
                                selectedDistrictId={selectedDistrictId}/>
                 </Grid>

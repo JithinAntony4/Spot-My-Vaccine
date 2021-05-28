@@ -29,7 +29,7 @@ export default function DayWiseList() {
     let router = useRouter();
     let user = useUser();
 
-    let {districtId, pincode, districtName, date} = router.query;
+    let {districtId, pincode, districtName, date, centerId, centerName} = router.query;
     const [errorMsg, setErrorMsg] = useState("");
     const [message, setMessage] = useState("");
 
@@ -65,7 +65,8 @@ export default function DayWiseList() {
                         <ArrowBackRoundedIcon fontSize={"small"}/>
                     </IconButton>
                     <Typography color={"secondary"} variant="h6" className={classes.title}>
-                        {pincode ? `Pincode ${pincode}` : `${districtName}`} ({dateLib.format(new Date(reverseFormattedDate(date)), 'MMM DD, dddd')})
+                        {pincode ? `Pincode ${pincode}` : (centerId ? `${centerName}` : `${districtName}`)} {date &&
+                    `(${dateLib.format(new Date(reverseFormattedDate(date)), 'MMM DD, dddd')})`}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -116,6 +117,7 @@ export default function DayWiseList() {
                                         isCovisheild={isCovisheild}
                                         isCovaxin={isCovaxin}
                                         isFree={isFree} date={date}
+                                        centerId={centerId}
                                         isPaid={isPaid} pincode={pincode} hospitalName={hospitalName}
                                         selectedDistrictId={districtId}/>
                 </Grid>
