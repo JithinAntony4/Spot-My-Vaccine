@@ -125,4 +125,4 @@ To contribute to Spot-My-Vaccine, follow these steps:
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## License
-This project is licensed under the MIT license, Copyright (c) 2021 Jithin Antony. For more information see LICENSE.md.
+This project is licensed under the MIT license, Copyright (c) 2021 [Jithin Antony](https://jithin.co/). For more information see LICENSE.md.
