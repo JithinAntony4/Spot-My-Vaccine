@@ -109,20 +109,20 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. 
+ 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 ## Contributing to Spot-My-Vaccine
-To contribute to Spot-My-Vaccine, follow these steps:
+To contribute to Spot-My-Vaccine, follow these steps: 
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
 3. Make your changes and commit them: `git commit -m '<commit_message>'`
 4. Push to the original branch: `git push origin <project_name>/<location>`
-5. Create the pull request.
+5. Create the pull request. 
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## License
-This project is licensed under the MIT license, Copyright (c) 2021 [Jithin Antony](https://jithin.co/). For more information see LICENSE.md. 
+This project is licensed under the MIT license, Copyright (c) 2021 [Jithin Antony](https://jithin.co/). For more information see LICENSE.md.
